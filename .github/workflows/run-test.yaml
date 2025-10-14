@@ -1,0 +1,10 @@
+name: Run Falcon Test
+on:
+  workflow_dispatch:
+jobs:
+  falcon-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
