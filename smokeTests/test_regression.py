@@ -15,7 +15,7 @@ def test_get_all_models():
     """✅ Validate GET /ai-ml-model-training/v1/featureGroup returns 200 and valid JSON."""
     url = f"{BASE_URL}/ai-ml-model-training/v1/featureGroup"
     print(f"Fetching all FG from: {url}")
-    resp = requests.get(url, timeout=10)-
+    resp = requests.get(url, timeout=10)
     assert resp.status_code == 200, f"Expected 200 OK, got {resp.status_code}"
     try:
         data = resp.json()
@@ -23,3 +23,4 @@ def test_get_all_models():
         pytest.fail(f"Response is not valid JSON: {e}")
     assert isinstance(data, (list, dict)), "Expected response type list or dict"
     print("Model list API response validated.")
+
