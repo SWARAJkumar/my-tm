@@ -122,4 +122,6 @@ jobs:
           kubectl get pods -n $NAMESPACE -o wide
 
       - name: list tm pod
-        run: kubectl get pods -n traininghost
+        run: |
+          kubectl get pods -n traininghost
+          kubectl get svc -n traininghost
