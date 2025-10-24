@@ -125,3 +125,17 @@ jobs:
         run: |
           kubectl get pods -n traininghost
           kubectl get svc -n traininghost
+          
+      - name: run regression test
+        run: |
+          kubectl port-forward svc/tm 32002:32002 -n traininghost &
+          sleep 10
+          pip install requests pytest pytest-html
+          pytest tests/ --maxfail=1 --disable-warnings -q --html=pytest_report.html
+      
+      
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report
+          path: pytest_report.html
