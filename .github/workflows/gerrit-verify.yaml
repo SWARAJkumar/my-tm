@@ -82,9 +82,10 @@ jobs:
       GERRIT_REFSPEC: ${{ inputs.GERRIT_REFSPEC }}
       TOX_ENVS: '["code"]'
       PYTHON_VERSION: '3.10'
+      PARALLEL: 1
 
   component-test:
-    needs: prepare
+    needs: [prepare, call-gerrit-tox-verify]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     
@@ -201,7 +202,7 @@ jobs:
   vote:
     if: ${{ always() }}
     # yamllint enable rule:line-length
-    needs: [prepare, call-gerrit-tox-verify]
+    needs: [prepare, call-gerrit-tox-verify,component-test]
     runs-on: ubuntu-latest
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
