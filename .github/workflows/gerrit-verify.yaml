@@ -216,7 +216,7 @@ jobs:
           --port=8085 \
           --target-port=32002 \
           -n traininghost
-          kubectl port-forward svc/tm-clusterip 8085:8085 -n traininghost
+          kubectl port-forward svc/tm-clusterip 8085:8085 -n traininghost & PF_PID=$!
           sleep 2
           python3 -m pytest component-testing/tests/ --disable-warnings -q --html=pytest_report.html
          
