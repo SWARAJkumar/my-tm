@@ -206,11 +206,18 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           pip install -r component-testing/tests/requirements.txt
-          echo "Sleeping before pw"
-          sleep 10
-          kubectl port-forward svc/tm -n traininghost  8085:32002 & PF_PID=$!
-          echo "Sleeping after pw"
-      
+          # echo "Sleeping before pw"
+          # sleep 10
+          # kubectl port-forward svc/tm -n traininghost  8085:32002 & PF_PID=$!
+          # echo "Sleeping after pw"
+          kubectl expose deployment tm \
+          --name=tm-clusterip \
+          --type=ClusterIP \
+          --port=8085 \
+          --target-port=32002 \
+          -n traininghost
+          kubectl port-forward svc/tm-clusterip 8085:8085 -n traininghost
+          sleep 2
           python3 -m pytest component-testing/tests/ --disable-warnings -q --html=pytest_report.html
          
           # Stop port-forwarding
