@@ -19,8 +19,8 @@ import pytest
 import requests
 import time
 from http import HTTPStatus
-BASE_URL = "http://localhost:32019/ai-ml-model-training/v1/featureGroup"
-BASE_URL_SHORT = "http://localhost:32019/featureGroup"
+BASE_URL = "http://localhost:8085/ai-ml-model-training/v1/featureGroup"
+BASE_URL_SHORT = "http://localhost:8085/featureGroup"
 @pytest.mark.parametrize("fg_name", ["base2", "base3", "base4"])
 class TestFeatureGroupCRUD:
     """End-to-end CRUD smoke tests for FeatureGroup API with cleanup"""
