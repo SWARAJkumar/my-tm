@@ -211,7 +211,7 @@ jobs:
           kubectl port-forward svc/tm -n traininghost  8085:32002 & PF_PID=$!
           echo "Sleeping after pw"
       
-          python3 -m pytest component-testing/tests/ --maxfail=1 --disable-warnings -q --html=pytest_report.html
+          python3 -m pytest component-testing/tests/ --disable-warnings -q --html=pytest_report.html
          
           # Stop port-forwarding
           kill $PF_PID
